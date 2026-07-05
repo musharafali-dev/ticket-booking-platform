@@ -13,6 +13,19 @@ from app.database import get_db
 router = APIRouter()
 
 
+@router.get("/all-schedules", response_model=list[ScheduleSearchResult])
+async def list_all_schedules(
+    departure_date: date | None = Query(default=None),
+    transport_type: TransportType | None = Query(default=None),
+    db: AsyncSession = Depends(get_db),
+):
+    return await service.list_all_schedules(
+        db,
+        departure_date=departure_date,
+        transport_type=transport_type,
+    )
+
+
 @router.get("/schedules", response_model=list[ScheduleSearchResult])
 async def search_schedules(
     departure_city: str = Query(..., min_length=1),

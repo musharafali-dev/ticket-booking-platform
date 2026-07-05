@@ -22,12 +22,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} relative min-h-screen text-slate-100 bg-[#070913] antialiased`}>
-        {/* Glow Blobs Background */}
-        <div className="pointer-events-none fixed inset-0 -z-20 overflow-hidden opacity-45">
-          <div className="absolute top-[-10%] left-[-10%] h-[500px] w-[500px] rounded-full bg-blue-600/20 blur-[120px] animate-float" />
-          <div className="absolute bottom-[10%] right-[-10%] h-[600px] w-[600px] rounded-full bg-indigo-600/15 blur-[150px] animate-float-reverse" />
-          <div className="absolute top-[40%] right-[20%] h-[350px] w-[350px] rounded-full bg-purple-600/10 blur-[100px] animate-float" />
-          <div className="absolute bottom-[30%] left-[10%] h-[400px] w-[400px] rounded-full bg-emerald-600/10 blur-[130px] animate-float-reverse" />
+        {/* Glow Blobs and Grid Background */}
+        <div className="pointer-events-none fixed inset-0 -z-20 overflow-hidden bg-[#070913]">
+          {/* Grid pattern */}
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:3rem_3rem]" />
+          
+          {/* Orange/Amber and Blue glowing radial blobs */}
+          <div className="absolute top-[-10%] left-[-10%] h-[550px] w-[550px] rounded-full bg-blue-600/15 blur-[120px] animate-float" />
+          <div className="absolute bottom-[10%] right-[-10%] h-[650px] w-[650px] rounded-full bg-orange-600/10 blur-[150px] animate-float-reverse" />
+          <div className="absolute top-[35%] right-[15%] h-[400px] w-[400px] rounded-full bg-amber-500/10 blur-[110px] animate-float" />
+          <div className="absolute bottom-[25%] left-[5%] h-[450px] w-[450px] rounded-full bg-blue-500/10 blur-[130px] animate-float-reverse" />
         </div>
         <SwrProvider>
           <NavBar />

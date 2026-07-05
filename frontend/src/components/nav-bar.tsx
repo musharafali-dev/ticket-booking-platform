@@ -34,6 +34,17 @@ export function NavBar() {
             >
               Search
             </Link>
+            <Link
+              href="/schedules"
+              className={clsx(
+                "transition duration-200",
+                isLinkActive("/schedules")
+                  ? "text-orange-400"
+                  : "text-slate-300 hover:text-white"
+              )}
+            >
+              Schedules
+            </Link>
             {user ? (
               <>
                 <Link

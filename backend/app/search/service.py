@@ -51,6 +51,32 @@ async def search_schedules(
     return list(result.scalars().all())
 
 
+async def list_all_schedules(
+    db: AsyncSession,
+    departure_date: date | None = None,
+    transport_type: TransportType | None = None,
+) -> list[Schedule]:
+    stmt = (
+        select(Schedule)
+        .options(
+            selectinload(Schedule.operator),
+            selectinload(Schedule.route),
+        )
+        .where(Schedule.status == ScheduleStatus.SCHEDULED)
+    )
+    if departure_date is not None:
+        stmt = stmt.where(Schedule.departure_date == departure_date)
+    else:
+        stmt = stmt.where(Schedule.departure_date >= date.today())
+
+    if transport_type is not None:
+        stmt = stmt.where(Schedule.operator.has(operator_type=transport_type))
+
+    stmt = stmt.order_by(Schedule.departure_date, Schedule.departure_time)
+    result = await db.execute(stmt)
+    return list(result.scalars().all())
+
+
 async def get_schedule_with_seats(
     db: AsyncSession, schedule_id: int
 ) -> Schedule | None:
