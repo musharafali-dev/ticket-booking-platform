@@ -11,13 +11,15 @@ interface SeatMapProps {
 export function SeatMap({ seats, selectedSeatIds, onToggle, maxSelectable }: SeatMapProps) {
   return (
     <div>
-      <div className="mb-4 flex gap-4 text-xs text-slate-600">
-        <LegendItem colorClass="bg-white border-slate-300" label="Available" />
-        <LegendItem colorClass="bg-brand-600 border-brand-600" label="Selected" />
-        <LegendItem colorClass="bg-slate-200 border-slate-200" label="Taken" />
+      {/* Legend */}
+      <div className="mb-6 flex gap-5 text-xs font-semibold text-slate-400 border-b border-white/5 pb-4">
+        <LegendItem colorClass="bg-white/5 border-white/15" label="Available" />
+        <LegendItem colorClass="bg-emerald-500/20 border-emerald-500/50 text-emerald-400" label="Selected" />
+        <LegendItem colorClass="bg-slate-950/80 border-white/5 text-slate-600" label="Taken" />
       </div>
 
-      <div className="grid grid-cols-4 gap-3 sm:grid-cols-6">
+      {/* Seat Grid */}
+      <div className="grid grid-cols-4 gap-3.5 sm:grid-cols-6 md:grid-cols-8">
         {seats.map((seat) => {
           const isSelected = selectedSeatIds.has(seat.id);
           const isAvailable = seat.status === "AVAILABLE";
@@ -38,15 +40,29 @@ export function SeatMap({ seats, selectedSeatIds, onToggle, maxSelectable }: Sea
                     : `Rs. ${seat.price.toLocaleString()}`
               }
               className={clsx(
-                "flex h-14 flex-col items-center justify-center rounded-md border text-xs font-medium transition",
-                isSelected && "border-brand-600 bg-brand-600 text-white",
-                !isSelected && isAvailable && isPickable && "border-slate-300 bg-white text-slate-700 hover:border-brand-500",
-                !isSelected && isAvailable && !isPickable && "cursor-not-allowed border-slate-200 bg-slate-50 text-slate-400",
-                !isAvailable && "cursor-not-allowed border-slate-200 bg-slate-200 text-slate-400"
+                "flex h-14 flex-col items-center justify-center rounded-xl border text-xs font-bold transition-all duration-300 relative overflow-hidden",
+                // Selected seat state
+                isSelected &&
+                  "border-emerald-500 bg-emerald-500/20 text-emerald-300 shadow-[0_0_15px_rgba(16,185,129,0.3)] scale-[1.02]",
+                // Available and Pickable seat state
+                !isSelected &&
+                  isAvailable &&
+                  isPickable &&
+                  "border-white/10 bg-white/5 text-slate-300 hover:bg-white/10 hover:border-blue-500/50 hover:shadow-[0_0_12px_rgba(59,130,246,0.15)] hover:scale-[1.03]",
+                // Available but not Pickable (reached max seats)
+                !isSelected &&
+                  isAvailable &&
+                  !isPickable &&
+                  "cursor-not-allowed border-white/5 bg-white/[0.02] text-slate-500",
+                // Taken seat state
+                !isAvailable &&
+                  "cursor-not-allowed border-white/5 bg-slate-950/80 text-slate-600"
               )}
             >
-              <span>{seat.seat_number}</span>
-              <span className="text-[10px] opacity-80">Rs. {seat.price.toLocaleString()}</span>
+              <span className="z-10">{seat.seat_number}</span>
+              <span className="text-[9px] font-medium opacity-70 z-10">
+                Rs. {seat.price.toLocaleString()}
+              </span>
             </button>
           );
         })}
@@ -57,9 +73,9 @@ export function SeatMap({ seats, selectedSeatIds, onToggle, maxSelectable }: Sea
 
 function LegendItem({ colorClass, label }: { colorClass: string; label: string }) {
   return (
-    <div className="flex items-center gap-1.5">
-      <span className={clsx("h-3 w-3 rounded-sm border", colorClass)} />
-      {label}
+    <div className="flex items-center gap-2">
+      <span className={clsx("h-3.5 w-3.5 rounded-md border backdrop-blur-sm", colorClass)} />
+      <span>{label}</span>
     </div>
   );
 }

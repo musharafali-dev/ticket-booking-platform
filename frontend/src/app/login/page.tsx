@@ -42,10 +42,10 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="mx-auto max-w-md">
-      <h1 className="mb-6 text-2xl font-bold text-slate-900">Log in</h1>
+    <div className="mx-auto max-w-md glass-panel rounded-2xl p-6 sm:p-8 border-white/5 shadow-2xl mt-8">
+      <h1 className="mb-6 text-2xl font-extrabold text-white">Log in</h1>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
+      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">
         {apiError && <Alert variant="error">{apiError}</Alert>}
 
         <TextField
@@ -63,7 +63,7 @@ export default function LoginPage() {
           error={errors.password?.message}
         />
 
-        <Button type="submit" isLoading={isSubmitting}>
+        <Button type="submit" isLoading={isSubmitting} className="w-full mt-2 py-3">
           Log in
         </Button>
       </form>

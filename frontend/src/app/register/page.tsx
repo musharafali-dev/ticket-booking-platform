@@ -45,10 +45,10 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="mx-auto max-w-md">
-      <h1 className="mb-6 text-2xl font-bold text-slate-900">Create your account</h1>
+    <div className="mx-auto max-w-md glass-panel rounded-2xl p-6 sm:p-8 border-white/5 shadow-2xl mt-8">
+      <h1 className="mb-6 text-2xl font-extrabold text-white">Create account</h1>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
+      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">
         {apiError && <Alert variant="error">{apiError}</Alert>}
 
         <div className="grid grid-cols-2 gap-4">
@@ -78,12 +78,12 @@ export default function RegisterPage() {
           {...register("password")}
           error={errors.password?.message}
         />
-        <p className="-mt-2 text-xs text-slate-500">
-          At least 8 characters, one uppercase letter, one digit, one special character.
+        <p className="-mt-3 text-[10px] font-semibold text-slate-400 uppercase tracking-wider">
+          Must contain 8+ chars, 1 uppercase, 1 digit, 1 symbol.
         </p>
 
-        <Button type="submit" isLoading={isSubmitting}>
-          Create account
+        <Button type="submit" isLoading={isSubmitting} className="w-full mt-2 py-3">
+          Create Account
         </Button>
       </form>
     </div>

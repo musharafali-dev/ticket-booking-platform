@@ -19,8 +19,9 @@ export default function ProfilePage() {
 
   return (
     <div className="mx-auto max-w-md">
-      <h1 className="mb-6 text-2xl font-bold text-slate-900">Profile</h1>
-      <div className="flex flex-col gap-3 rounded-lg border border-slate-200 bg-white p-6">
+      <h1 className="mb-6 text-2xl font-extrabold text-white">Profile</h1>
+      <div className="flex flex-col gap-5 rounded-2xl glass-panel p-6 border-white/5 shadow-2xl relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-1.5 h-full bg-gradient-to-b from-blue-500 to-indigo-500" />
         <Field label="Name" value={`${user.first_name} ${user.last_name}`} />
         <Field label="Email" value={user.email} />
         <Field label="Phone" value={user.phone_number ?? "Not provided"} />
@@ -35,9 +36,9 @@ export default function ProfilePage() {
 
 function Field({ label, value }: { label: string; value: string }) {
   return (
-    <div>
-      <p className="text-xs font-medium uppercase tracking-wide text-slate-400">{label}</p>
-      <p className="text-sm text-slate-900">{value}</p>
+    <div className="border-b border-white/5 pb-3 last:border-b-0 last:pb-0">
+      <p className="text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1">{label}</p>
+      <p className="text-sm font-semibold text-slate-200">{value}</p>
     </div>
   );
 }

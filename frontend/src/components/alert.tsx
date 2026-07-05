@@ -10,10 +10,10 @@ export function Alert({ variant, children }: AlertProps) {
     <div
       role={variant === "error" ? "alert" : "status"}
       className={clsx(
-        "rounded-md border px-4 py-3 text-sm",
-        variant === "error" && "border-red-200 bg-red-50 text-red-700",
-        variant === "success" && "border-green-200 bg-green-50 text-green-700",
-        variant === "info" && "border-blue-200 bg-blue-50 text-blue-700"
+        "rounded-lg border px-4 py-3.5 text-sm backdrop-blur-md shadow-sm transition-all duration-300",
+        variant === "error" && "border-red-500/20 bg-red-500/10 text-red-200 shadow-[0_0_15px_rgba(239,68,68,0.1)]",
+        variant === "success" && "border-emerald-500/20 bg-emerald-500/10 text-emerald-200 shadow-[0_0_15px_rgba(16,185,129,0.1)]",
+        variant === "info" && "border-blue-500/20 bg-blue-500/10 text-blue-200 shadow-[0_0_15px_rgba(59,130,246,0.1)]"
       )}
     >
       {children}

@@ -10,16 +10,16 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
   ({ label, error, className, id, ...props }, ref) => {
     const fieldId = id ?? props.name;
     return (
-      <div className="flex flex-col gap-1">
-        <label htmlFor={fieldId} className="text-sm font-medium text-slate-700">
+      <div className="flex flex-col gap-1.5 w-full">
+        <label htmlFor={fieldId} className="text-xs font-semibold uppercase tracking-wider text-slate-400">
           {label}
         </label>
         <input
           ref={ref}
           id={fieldId}
           className={clsx(
-            "rounded-md border px-3 py-2 text-sm outline-none transition focus:ring-2 focus:ring-brand-500",
-            error ? "border-red-400" : "border-slate-300",
+            "glass-input w-full rounded-lg px-3.5 py-2.5 text-sm transition-all duration-200 outline-none",
+            error ? "border-red-500/40 focus:border-red-500 focus:shadow-[0_0_15px_rgba(239,68,68,0.2)]" : "border-white/10 hover:border-white/20 focus:border-blue-500 focus:shadow-[0_0_15px_rgba(59,130,246,0.25)]",
             className
           )}
           aria-invalid={!!error}
@@ -27,7 +27,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
           {...props}
         />
         {error && (
-          <p id={`${fieldId}-error`} className="text-xs text-red-600">
+          <p id={`${fieldId}-error`} className="text-xs text-red-400 font-medium">
             {error}
           </p>
         )}

@@ -2,51 +2,93 @@
 
 import Link from "next/link";
 import { useAuthStore } from "@/store/auth-store";
+import { usePathname } from "next/navigation";
+import clsx from "clsx";
 
 export function NavBar() {
   const { user, clearAuth } = useAuthStore();
+  const pathname = usePathname();
+
+  const isLinkActive = (path: string) => pathname === path;
 
   return (
-    <header className="border-b border-slate-200 bg-white">
-      <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-4">
-        <Link href="/" className="text-lg font-bold text-brand-600">
-          TicketBooking<span className="text-slate-900">.pk</span>
-        </Link>
-
-        <nav className="flex items-center gap-4 text-sm">
-          <Link href="/" className="text-slate-600 hover:text-slate-900">
-            Search
+    <div className="mx-auto max-w-5xl px-4 pt-4">
+      <header className="rounded-xl border border-white/5 bg-[#0f172a]/60 backdrop-blur-md px-6 py-4 shadow-xl">
+        <div className="flex items-center justify-between">
+          <Link href="/" className="group text-lg font-extrabold tracking-tight">
+            <span className="bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-transparent group-hover:from-blue-300 group-hover:to-indigo-300 transition-all duration-300">
+              TicketBooking
+            </span>
+            <span className="text-slate-200">.pk</span>
           </Link>
-          {user ? (
-            <>
-              <Link href="/bookings" className="text-slate-600 hover:text-slate-900">
-                My Bookings
-              </Link>
-              <Link href="/profile" className="text-slate-600 hover:text-slate-900">
-                {user.first_name}
-              </Link>
-              <button
-                onClick={clearAuth}
-                className="rounded-md border border-slate-300 px-3 py-1.5 text-slate-700 hover:bg-slate-50"
-              >
-                Log out
-              </button>
-            </>
-          ) : (
-            <>
-              <Link href="/login" className="text-slate-600 hover:text-slate-900">
-                Log in
-              </Link>
-              <Link
-                href="/register"
-                className="rounded-md bg-brand-600 px-3 py-1.5 text-white hover:bg-brand-700"
-              >
-                Sign up
-              </Link>
-            </>
-          )}
-        </nav>
-      </div>
-    </header>
+
+          <nav className="flex items-center gap-6 text-sm font-medium">
+            <Link
+              href="/"
+              className={clsx(
+                "transition duration-200",
+                isLinkActive("/")
+                  ? "text-blue-400"
+                  : "text-slate-300 hover:text-white"
+              )}
+            >
+              Search
+            </Link>
+            {user ? (
+              <>
+                <Link
+                  href="/bookings"
+                  className={clsx(
+                    "transition duration-200",
+                    isLinkActive("/bookings")
+                      ? "text-blue-400"
+                      : "text-slate-300 hover:text-white"
+                  )}
+                >
+                  My Bookings
+                </Link>
+                <Link
+                  href="/profile"
+                  className={clsx(
+                    "transition duration-200",
+                    isLinkActive("/profile")
+                      ? "text-blue-400"
+                      : "text-slate-300 hover:text-white"
+                  )}
+                >
+                  {user.first_name}
+                </Link>
+                <button
+                  onClick={clearAuth}
+                  className="rounded-lg border border-white/10 px-3.5 py-1.5 text-slate-300 transition duration-200 hover:bg-white/5 hover:border-white/20 hover:text-white"
+                >
+                  Log out
+                </button>
+              </>
+            ) : (
+              <>
+                <Link
+                  href="/login"
+                  className={clsx(
+                    "transition duration-200",
+                    isLinkActive("/login")
+                      ? "text-blue-400"
+                      : "text-slate-300 hover:text-white"
+                  )}
+                >
+                  Log in
+                </Link>
+                <Link
+                  href="/register"
+                  className="rounded-lg bg-gradient-to-r from-blue-600 to-indigo-600 px-4 py-2 font-semibold text-white shadow-[0_4px_15px_rgba(37,99,235,0.2)] hover:from-blue-500 hover:to-indigo-500 transition duration-300"
+                >
+                  Sign up
+                </Link>
+              </>
+            )}
+          </nav>
+        </div>
+      </header>
+    </div>
   );
 }

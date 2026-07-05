@@ -24,6 +24,24 @@ const formSchema = z.object({
 
 type FormValues = z.infer<typeof formSchema>;
 
+function BookingSteps({ currentStep }: { currentStep: 1 | 2 | 3 }) {
+  return (
+    <div className="flex items-center justify-center gap-3 mb-6 text-[10px] sm:text-xs font-bold uppercase tracking-wider">
+      <span className={currentStep === 1 ? "text-blue-400" : "text-slate-500"}>
+        1. Select Seats
+      </span>
+      <span className="text-slate-600">➔</span>
+      <span className={currentStep === 2 ? "text-blue-400 shadow-[0_0_10px_rgba(59,130,246,0.2)]" : "text-slate-500"}>
+        2. Passengers Info
+      </span>
+      <span className="text-slate-600">➔</span>
+      <span className={currentStep === 3 ? "text-blue-400" : "text-slate-500"}>
+        3. Payment Checkout
+      </span>
+    </div>
+  );
+}
+
 export default function PassengerDetailsPage() {
   const params = useParams<{ scheduleId: string }>();
   const router = useRouter();
@@ -71,8 +89,14 @@ export default function PassengerDetailsPage() {
   };
 
   return (
-    <div className="mx-auto max-w-lg">
-      <h1 className="mb-6 text-2xl font-bold text-slate-900">Passenger details</h1>
+    <div className="mx-auto max-w-lg flex flex-col gap-6">
+      {/* Steps Indicator */}
+      <BookingSteps currentStep={2} />
+
+      <div>
+        <h1 className="mb-2 text-2xl font-extrabold text-white">Passenger Details</h1>
+        <p className="text-sm text-slate-400">Provide names as they appear on official identity documents.</p>
+      </div>
 
       {!user && (
         <Alert variant="info">
@@ -81,29 +105,34 @@ export default function PassengerDetailsPage() {
         </Alert>
       )}
 
-      <form onSubmit={handleSubmit(onSubmit)} className="mt-4 flex flex-col gap-6">
-        {fields.map((field, index) => (
-          <div key={field.id} className="rounded-lg border border-slate-200 p-4">
-            <p className="mb-3 text-sm font-medium text-slate-500">
-              Seat {selectedSeats[index]?.seat_number}
-            </p>
-            <div className="grid grid-cols-2 gap-4">
-              <TextField
-                label="First name"
-                {...register(`passengers.${index}.first_name`)}
-                error={errors.passengers?.[index]?.first_name?.message}
-              />
-              <TextField
-                label="Last name"
-                {...register(`passengers.${index}.last_name`)}
-                error={errors.passengers?.[index]?.last_name?.message}
-              />
+      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6">
+        {/* Passenger Fields */}
+        <div className="flex flex-col gap-4">
+          {fields.map((field, index) => (
+            <div key={field.id} className="glass-panel rounded-xl p-5 border-white/5 relative overflow-hidden">
+              <div className="absolute top-0 left-0 w-1.5 h-full bg-gradient-to-b from-blue-500 to-indigo-500" />
+              <p className="mb-4 text-xs font-bold uppercase tracking-wider text-blue-400">
+                Seat {selectedSeats[index]?.seat_number} — Passenger #{index + 1}
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <TextField
+                  label="First name"
+                  {...register(`passengers.${index}.first_name`)}
+                  error={errors.passengers?.[index]?.first_name?.message}
+                />
+                <TextField
+                  label="Last name"
+                  {...register(`passengers.${index}.last_name`)}
+                  error={errors.passengers?.[index]?.last_name?.message}
+                />
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
 
-        <div className="rounded-lg border border-slate-200 p-4">
-          <p className="mb-3 text-sm font-medium text-slate-500">Booking contact</p>
+        {/* Contact Info Card */}
+        <div className="glass-panel rounded-xl p-5 border-white/5">
+          <p className="mb-4 text-xs font-bold uppercase tracking-wider text-slate-400">Booking Contact</p>
           <div className="flex flex-col gap-4">
             <TextField
               label="Contact email"
@@ -113,13 +142,16 @@ export default function PassengerDetailsPage() {
             />
             <TextField
               label="Contact phone (optional)"
+              placeholder="+92-300-1234567"
               {...register("contact_phone")}
               error={errors.contact_phone?.message}
             />
           </div>
         </div>
 
-        <Button type="submit">Continue to payment</Button>
+        <Button type="submit" className="py-3">
+          Continue to Payment
+        </Button>
       </form>
     </div>
   );
