@@ -27,7 +27,7 @@ export default function BookingsPage() {
   if (isLoading) {
     return (
       <div className="flex flex-col items-center justify-center gap-3 py-20" role="status">
-        <svg className="h-8 w-8 animate-spin text-blue-500" fill="none" viewBox="0 0 24 24">
+        <svg className="h-8 w-8 animate-spin text-orange-500" fill="none" viewBox="0 0 24 24">
           <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
           <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
         </svg>
@@ -45,7 +45,7 @@ export default function BookingsPage() {
       <div className="text-center py-12 glass-panel rounded-xl p-8 border-white/5 max-w-md mx-auto">
         <span className="text-4xl mb-4 block">🎫</span>
         <p className="mb-6 text-slate-400 font-medium">You haven&apos;t made any ticket bookings yet.</p>
-        <Link href="/" className="inline-flex rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-500 transition duration-300">
+        <Link href="/" className="inline-flex rounded-lg bg-orange-600 px-4 py-2 text-sm font-semibold text-white hover:bg-orange-500 transition duration-300">
           Book a Trip Now
         </Link>
       </div>
@@ -64,7 +64,7 @@ export default function BookingsPage() {
           <Link
             key={booking.id}
             href={`/bookings/${booking.id}/confirmation`}
-            className="glass-card flex items-center justify-between rounded-xl p-5 border-white/5 transition hover:border-blue-500/40"
+            className="glass-card flex items-center justify-between rounded-xl p-5 border-white/5 transition hover:border-orange-500/40"
           >
             <div className="flex flex-col gap-1">
               <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Booking Code</span>

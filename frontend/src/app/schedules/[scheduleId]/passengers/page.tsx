@@ -27,15 +27,15 @@ type FormValues = z.infer<typeof formSchema>;
 function BookingSteps({ currentStep }: { currentStep: 1 | 2 | 3 }) {
   return (
     <div className="flex items-center justify-center gap-3 mb-6 text-[10px] sm:text-xs font-bold uppercase tracking-wider">
-      <span className={currentStep === 1 ? "text-blue-400" : "text-slate-500"}>
+      <span className={currentStep === 1 ? "text-orange-400" : "text-slate-500"}>
         1. Select Seats
       </span>
       <span className="text-slate-600">➔</span>
-      <span className={currentStep === 2 ? "text-blue-400 shadow-[0_0_10px_rgba(59,130,246,0.2)]" : "text-slate-500"}>
+      <span className={currentStep === 2 ? "text-orange-400 shadow-[0_0_10px_rgba(249,115,22,0.2)]" : "text-slate-500"}>
         2. Passengers Info
       </span>
       <span className="text-slate-600">➔</span>
-      <span className={currentStep === 3 ? "text-blue-400" : "text-slate-500"}>
+      <span className={currentStep === 3 ? "text-orange-400" : "text-slate-500"}>
         3. Payment Checkout
       </span>
     </div>
@@ -110,8 +110,8 @@ export default function PassengerDetailsPage() {
         <div className="flex flex-col gap-4">
           {fields.map((field, index) => (
             <div key={field.id} className="glass-panel rounded-xl p-5 border-white/5 relative overflow-hidden">
-              <div className="absolute top-0 left-0 w-1.5 h-full bg-gradient-to-b from-blue-500 to-indigo-500" />
-              <p className="mb-4 text-xs font-bold uppercase tracking-wider text-blue-400">
+              <div className="absolute top-0 left-0 w-1.5 h-full bg-gradient-to-b from-orange-500 to-amber-500" />
+              <p className="mb-4 text-xs font-bold uppercase tracking-wider text-orange-400">
                 Seat {selectedSeats[index]?.seat_number} — Passenger #{index + 1}
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

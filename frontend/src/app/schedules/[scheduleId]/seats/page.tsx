@@ -14,15 +14,15 @@ const MAX_PASSENGERS = 6;
 function BookingSteps({ currentStep }: { currentStep: 1 | 2 | 3 }) {
   return (
     <div className="flex items-center justify-center gap-3 mb-6 text-[10px] sm:text-xs font-bold uppercase tracking-wider">
-      <span className={currentStep === 1 ? "text-blue-400 shadow-[0_0_10px_rgba(59,130,246,0.2)]" : "text-slate-500"}>
+      <span className={currentStep === 1 ? "text-orange-400 shadow-[0_0_10px_rgba(249,115,22,0.2)]" : "text-slate-500"}>
         1. Select Seats
       </span>
       <span className="text-slate-600">➔</span>
-      <span className={currentStep === 2 ? "text-blue-400" : "text-slate-500"}>
+      <span className={currentStep === 2 ? "text-orange-400" : "text-slate-500"}>
         2. Passengers Info
       </span>
       <span className="text-slate-600">➔</span>
-      <span className={currentStep === 3 ? "text-blue-400" : "text-slate-500"}>
+      <span className={currentStep === 3 ? "text-orange-400" : "text-slate-500"}>
         3. Payment Checkout
       </span>
     </div>
@@ -54,7 +54,7 @@ export default function SeatSelectionPage() {
   if (isLoading) {
     return (
       <div className="flex flex-col items-center justify-center gap-3 py-20" role="status">
-        <svg className="h-8 w-8 animate-spin text-blue-500" fill="none" viewBox="0 0 24 24">
+        <svg className="h-8 w-8 animate-spin text-orange-500" fill="none" viewBox="0 0 24 24">
           <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
           <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
         </svg>
@@ -135,7 +135,7 @@ export default function SeatSelectionPage() {
           <p className="text-xs text-slate-400 font-semibold uppercase tracking-wider mb-1">
             Selected {selectedSeats.length} of {passengerCount} seat{passengerCount > 1 ? "s" : ""}
           </p>
-          <p className="text-2xl font-extrabold text-blue-400">
+          <p className="text-2xl font-extrabold text-orange-400">
             Rs. {totalPrice.toLocaleString()}
           </p>
         </div>

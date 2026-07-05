@@ -16,7 +16,7 @@ export function NavBar() {
       <header className="rounded-xl border border-white/5 bg-[#0f172a]/60 backdrop-blur-md px-6 py-4 shadow-xl">
         <div className="flex items-center justify-between">
           <Link href="/" className="group text-lg font-extrabold tracking-tight">
-            <span className="bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-transparent group-hover:from-blue-300 group-hover:to-indigo-300 transition-all duration-300">
+            <span className="bg-gradient-to-r from-orange-400 to-amber-400 bg-clip-text text-transparent group-hover:from-orange-300 group-hover:to-amber-300 transition-all duration-300">
               TicketBooking
             </span>
             <span className="text-slate-200">.pk</span>
@@ -28,7 +28,7 @@ export function NavBar() {
               className={clsx(
                 "transition duration-200",
                 isLinkActive("/")
-                  ? "text-blue-400"
+                  ? "text-orange-400"
                   : "text-slate-300 hover:text-white"
               )}
             >
@@ -41,7 +41,7 @@ export function NavBar() {
                   className={clsx(
                     "transition duration-200",
                     isLinkActive("/bookings")
-                      ? "text-blue-400"
+                      ? "text-orange-400"
                       : "text-slate-300 hover:text-white"
                   )}
                 >
@@ -52,7 +52,7 @@ export function NavBar() {
                   className={clsx(
                     "transition duration-200",
                     isLinkActive("/profile")
-                      ? "text-blue-400"
+                      ? "text-orange-400"
                       : "text-slate-300 hover:text-white"
                   )}
                 >
@@ -72,7 +72,7 @@ export function NavBar() {
                   className={clsx(
                     "transition duration-200",
                     isLinkActive("/login")
-                      ? "text-blue-400"
+                      ? "text-orange-400"
                       : "text-slate-300 hover:text-white"
                   )}
                 >
@@ -80,7 +80,7 @@ export function NavBar() {
                 </Link>
                 <Link
                   href="/register"
-                  className="rounded-lg bg-gradient-to-r from-blue-600 to-indigo-600 px-4 py-2 font-semibold text-white shadow-[0_4px_15px_rgba(37,99,235,0.2)] hover:from-blue-500 hover:to-indigo-500 transition duration-300"
+                  className="rounded-lg bg-gradient-to-r from-orange-500 to-amber-500 px-4 py-2 font-semibold text-white shadow-[0_4px_15px_rgba(249,115,22,0.2)] hover:from-orange-400 hover:to-amber-400 transition duration-300"
                 >
                   Sign up
                 </Link>

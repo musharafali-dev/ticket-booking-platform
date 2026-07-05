@@ -28,7 +28,7 @@ export default function ConfirmationPage() {
   if (isLoading) {
     return (
       <div className="flex flex-col items-center justify-center gap-3 py-20" role="status">
-        <svg className="h-8 w-8 animate-spin text-blue-500" fill="none" viewBox="0 0 24 24">
+        <svg className="h-8 w-8 animate-spin text-orange-500" fill="none" viewBox="0 0 24 24">
           <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
           <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
         </svg>
@@ -65,6 +65,43 @@ export default function ConfirmationPage() {
     window.print();
   };
 
+  const renderHeaderIcon = () => {
+    if (isConfirmed) {
+      return (
+        <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-400 shadow-[0_0_20px_rgba(16,185,129,0.2)]">
+          <svg className="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" />
+          </svg>
+        </div>
+      );
+    }
+    if (isPending) {
+      return (
+        <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-amber-500/10 border border-amber-500/25 text-amber-400 shadow-[0_0_20px_rgba(245,158,11,0.2)] animate-pulse">
+          <svg className="h-8 w-8 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M12 6v6l4 2M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </div>
+      );
+    }
+    if (isCancelled) {
+      return (
+        <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-slate-500/10 border border-slate-500/25 text-slate-400">
+          <svg className="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
+          </svg>
+        </div>
+      );
+    }
+    return (
+      <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-red-500/10 border border-red-500/25 text-red-400 shadow-[0_0_20px_rgba(239,68,68,0.2)]">
+        <svg className="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      </div>
+    );
+  };
+
   return (
     <div className="mx-auto max-w-lg flex flex-col gap-6">
       {/* Print stylesheet injected directly */}
@@ -98,18 +135,9 @@ export default function ConfirmationPage() {
         }
       ` }} />
 
-      {/* Success/Pending Header Icon */}
+      {/* Status Header */}
       <div className="text-center no-print mt-4">
-        <div
-          className={`mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full text-3xl shadow-lg transition duration-500 ${
-            isConfirmed ? "bg-emerald-500/10 border border-emerald-500/25 text-emerald-400 shadow-[0_0_20px_rgba(16,185,129,0.2)]" :
-            isPending ? "bg-amber-500/10 border border-amber-500/25 text-amber-400 shadow-[0_0_20px_rgba(245,158,11,0.2)] animate-pulse" :
-            isCancelled ? "bg-slate-500/10 border border-slate-500/25 text-slate-400" :
-            "bg-red-500/10 border border-red-500/25 text-red-400"
-          }`}
-        >
-          {isConfirmed ? "✅" : isPending ? "⏳" : isCancelled ? "🚫" : "❌"}
-        </div>
+        {renderHeaderIcon()}
 
         <h1 className="mb-1 text-3xl font-extrabold text-white">
           {isConfirmed ? "Booking Confirmed!" :
@@ -123,7 +151,7 @@ export default function ConfirmationPage() {
 
       {/* Digital Ticket Layout */}
       <div className="print-ticket glass-panel rounded-2xl relative overflow-hidden p-6 border-white/10 shadow-2xl flex flex-col">
-        {/* Ticket Tears (Boarding pass look) */}
+        {/* Ticket Tears */}
         <div className="ticket-tear-left" />
         <div className="ticket-tear-right" />
 
@@ -137,7 +165,7 @@ export default function ConfirmationPage() {
           </div>
           <div className="text-right">
             <span className="text-[9px] font-bold uppercase tracking-widest text-slate-500 block mb-0.5">Reference</span>
-            <span className="font-mono font-bold text-blue-400 tracking-wider text-sm">{booking.booking_code}</span>
+            <span className="font-mono font-bold text-orange-400 tracking-wider text-sm">{booking.booking_code}</span>
           </div>
         </div>
 
@@ -162,7 +190,7 @@ export default function ConfirmationPage() {
         {/* Dashed Separator */}
         <div className="border-t-2 border-dashed border-white/10 my-2 relative" />
 
-        {/* Ticket Body / Passengers & Seats */}
+        {/* Ticket Manifest */}
         <div className="py-3 flex flex-col gap-2">
           <span className="text-[9px] font-bold uppercase tracking-widest text-slate-500 block mb-1">Manifest</span>
           {booking.passengers.map((p) => (
@@ -177,10 +205,10 @@ export default function ConfirmationPage() {
           ))}
         </div>
 
-        {/* Ticket Divider */}
+        {/* Dashed Separator */}
         <div className="border-t-2 border-dashed border-white/10 my-2 relative" />
 
-        {/* Ticket Bottom / Fare & Barcode */}
+        {/* Ticket Bottom */}
         <div className="pt-4 flex flex-col gap-5">
           <div className="flex justify-between items-end">
             <div>
@@ -189,7 +217,7 @@ export default function ConfirmationPage() {
             </div>
             <div className="text-right">
               <span className="text-[9px] font-bold uppercase tracking-widest text-slate-500 block mb-0.5">Total Paid</span>
-              <span className="text-xl font-extrabold text-blue-400">
+              <span className="text-xl font-extrabold text-orange-400">
                 Rs. {booking.total_amount.toLocaleString()}
               </span>
             </div>
@@ -218,16 +246,22 @@ export default function ConfirmationPage() {
         <Link href="/bookings">
           <Button variant="secondary" className="w-full sm:w-auto">My Bookings</Button>
         </Link>
-        <Button onClick={handlePrint} className="w-full sm:w-auto">
-          🖨️ Print Ticket
+        <Button onClick={handlePrint} className="w-full sm:w-auto flex items-center justify-center">
+          <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+          </svg>
+          Print Ticket
         </Button>
         {(isConfirmed || isPending) && (
           <Button
             variant="danger"
             onClick={() => setIsCancelModalOpen(true)}
-            className="w-full sm:w-auto"
+            className="w-full sm:w-auto flex items-center justify-center"
           >
-            🚫 Cancel Booking
+            <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-4v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+            </svg>
+            Cancel Booking
           </Button>
         )}
       </div>
@@ -267,7 +301,7 @@ export default function ConfirmationPage() {
                     onChange={(e) => setCustomReason(e.target.value)}
                     placeholder="Provide details about your cancellation..."
                     rows={3}
-                    className="glass-input rounded-lg px-3.5 py-2.5 text-sm outline-none w-full resize-none focus:border-blue-500 focus:shadow-[0_0_15px_rgba(59,130,246,0.25)]"
+                    className="glass-input rounded-lg px-3.5 py-2.5 text-sm outline-none w-full resize-none focus:border-orange-500 focus:shadow-[0_0_15px_rgba(249,115,22,0.25)]"
                   />
                 </div>
               )}

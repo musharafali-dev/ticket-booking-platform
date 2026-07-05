@@ -48,7 +48,7 @@ export function SeatMap({ seats, selectedSeatIds, onToggle, maxSelectable }: Sea
                 !isSelected &&
                   isAvailable &&
                   isPickable &&
-                  "border-white/10 bg-white/5 text-slate-300 hover:bg-white/10 hover:border-blue-500/50 hover:shadow-[0_0_12px_rgba(59,130,246,0.15)] hover:scale-[1.03]",
+                  "border-white/10 bg-white/5 text-slate-300 hover:bg-white/10 hover:border-orange-500/50 hover:shadow-[0_0_12px_rgba(249,115,22,0.15)] hover:scale-[1.03]",
                 // Available but not Pickable (reached max seats)
                 !isSelected &&
                   isAvailable &&
