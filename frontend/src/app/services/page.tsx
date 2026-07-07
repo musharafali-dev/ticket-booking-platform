@@ -208,7 +208,7 @@ export default function ServicesPage() {
         
         <div className="flex justify-center">
           <Link href="/">
-            <Button size="lg" className="bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-400 hover:to-amber-400 text-white font-semibold shadow-[0_4px_15px_rgba(249,115,22,0.2)]">
+            <Button className="px-7 py-3 text-base">
               Search & Book Now
             </Button>
           </Link>
