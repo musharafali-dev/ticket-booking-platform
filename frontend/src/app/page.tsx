@@ -243,6 +243,43 @@ export default function SearchPage() {
             </div>
           </div>
         </form>
+
+        {/* Popular Routes Section */}
+        <div className="mt-6 pt-5 border-t border-white/5">
+          <p className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-3">Popular Routes</p>
+          <div className="flex flex-wrap gap-2">
+            {[
+              { from: "Karachi", to: "Lahore" },
+              { from: "Lahore", to: "Islamabad" },
+              { from: "Karachi", to: "Islamabad" },
+              { from: "Peshawar", to: "Islamabad" },
+              { from: "Multan", to: "Lahore" },
+            ].map((route, idx) => (
+              <button
+                key={idx}
+                type="button"
+                onClick={() => {
+                  setDepartureCity(route.from);
+                  setArrivalCity(route.to);
+                  // Trigger search with selected route parameters
+                  setSubmittedParams({
+                    departureCity: route.from,
+                    arrivalCity: route.to,
+                    departureDate,
+                    transportType: transportType || undefined,
+                  });
+                }}
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold border border-white/10 bg-white/5 text-slate-300 hover:bg-orange-500/10 hover:border-orange-500/30 hover:text-orange-400 transition-all duration-300"
+              >
+                <span>{route.from}</span>
+                <svg className="w-3 h-3 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+                <span>{route.to}</span>
+              </button>
+            ))}
+          </div>
+        </div>
       </div>
 
       {isLoading && (
