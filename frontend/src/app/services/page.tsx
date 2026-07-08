@@ -30,6 +30,8 @@ export default function ServicesPage() {
       ),
       tags: ["Daewoo", "Faisal Movers", "Sania Express"],
       highlight: "Luxury & Executive coaches",
+      link: "/?type=BUS",
+      btnText: "Book Bus Tickets",
     },
     {
       id: "train",
@@ -43,6 +45,8 @@ export default function ServicesPage() {
       ),
       tags: ["Green Line", "Tezgam", "Karakoram"],
       highlight: "AC Sleeper & Standard berths",
+      link: "/?type=TRAIN",
+      btnText: "Book Train Tickets",
     },
     {
       id: "flight",
@@ -56,6 +60,8 @@ export default function ServicesPage() {
       ),
       tags: ["PIA", "AirSial", "Serene Air", "Fly Jinnah"],
       highlight: "All major domestic airlines",
+      link: "/?type=AIRPLANE",
+      btnText: "Book Flight Tickets",
     },
     // Tech & Security
     {
@@ -70,6 +76,8 @@ export default function ServicesPage() {
       ),
       tags: ["Concurrency-safe", "PostgreSQL advisory locks", "10-min grace period"],
       highlight: "Guaranteed Seat Availability",
+      link: "/",
+      btnText: "Start Booking",
     },
     {
       id: "cancellation",
@@ -83,6 +91,8 @@ export default function ServicesPage() {
       ),
       tags: ["Self-service", "Instant seat release", "Flexible policies"],
       highlight: "No-fuss ticket cancellation",
+      link: "/bookings",
+      btnText: "Manage Bookings",
     },
     // Payments
     {
@@ -97,6 +107,8 @@ export default function ServicesPage() {
       ),
       tags: ["EasyPaisa", "JazzCash", "Mock Gateway Enabled"],
       highlight: "No credit card required",
+      link: "/",
+      btnText: "Proceed to Booking",
     },
     {
       id: "cards",
@@ -110,6 +122,8 @@ export default function ServicesPage() {
       ),
       tags: ["Visa", "Mastercard", "UnionPay", "PayPak"],
       highlight: "Fast checkout using 3D secure",
+      link: "/",
+      btnText: "Proceed to Booking",
     },
   ];
 
@@ -176,21 +190,32 @@ export default function ServicesPage() {
             </div>
 
             {/* Bottom details */}
-            <div className="mt-auto">
-              <div className="flex flex-wrap gap-1.5 mb-4">
-                {feat.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-slate-400 bg-white/5 rounded border border-white/5"
-                  >
-                    {tag}
-                  </span>
-                ))}
+            <div className="mt-auto flex flex-col gap-4">
+              <div>
+                <div className="flex flex-wrap gap-1.5 mb-4">
+                  {feat.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-slate-400 bg-white/5 rounded border border-white/5"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                <div className="flex items-center justify-between pt-3 border-t border-white/5 text-xs">
+                  <span className="text-slate-400 font-medium">Feature Highlights</span>
+                  <span className="font-semibold text-orange-400">{feat.highlight}</span>
+                </div>
               </div>
-              <div className="flex items-center justify-between pt-3 border-t border-white/5 text-xs">
-                <span className="text-slate-400 font-medium">Feature Highlights</span>
-                <span className="font-semibold text-orange-400">{feat.highlight}</span>
-              </div>
+
+              <Link href={feat.link} className="w-full">
+                <Button
+                  variant={feat.category === "transport" ? "primary" : "secondary"}
+                  className="w-full py-2.5 text-xs font-bold"
+                >
+                  {feat.btnText}
+                </Button>
+              </Link>
             </div>
           </div>
         ))}

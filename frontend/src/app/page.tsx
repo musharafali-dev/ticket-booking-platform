@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useScheduleSearch } from "@/hooks/use-schedule-search";
 import { useBookingFlowStore } from "@/store/booking-flow-store";
@@ -37,6 +37,22 @@ export default function SearchPage() {
     departureDate: string;
     transportType?: string;
   } | null>(null);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const searchParams = new URLSearchParams(window.location.search);
+      const typeParam = searchParams.get("type");
+      if (typeParam === "BUS" || typeParam === "TRAIN" || typeParam === "AIRPLANE") {
+        setTransportType(typeParam);
+        setSubmittedParams({
+          departureCity: "Karachi",
+          arrivalCity: "Lahore",
+          departureDate: todayIsoDate(),
+          transportType: typeParam,
+        });
+      }
+    }
+  }, []);
 
   const { data: results, error, isLoading } = useScheduleSearch(submittedParams);
 
